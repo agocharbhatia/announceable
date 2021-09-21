@@ -9,6 +9,7 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
 	<link rel="stylesheet" href="./vendor/chartist/css/chartist.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,900&amp;display=swap" rel="stylesheet">
     <link href="./vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
     <link href="./css/style.css" rel="stylesheet">
 	<link rel="stylesheet" href="./css/custom-css.css">
@@ -43,7 +44,7 @@
 			<a href="index.html" class="brand-logo">
                
 				<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-					viewBox="-5 -15 80 80" xml:space="preserve">
+					viewBox="-5 -15 80 80" width="80" height="80" xml:space="preserve">
 				<style type="text/css">
 					.st0{fill:#29ABE2;stroke:#29ABE2;stroke-miterlimit:10;}
 					.st1{fill:none;}
@@ -82,7 +83,7 @@
 				</svg>
 
 				<svg class="brand-title" style="overflow: visible;" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-					viewBox="100 -25 300 650" xml:space="preserve">
+					viewBox="100 -25 300 650" width="300" height="650" xml:space="preserve">
 				<style type="text/css">
 					.st0{fill:#29ABE2;}
 				</style>
@@ -324,7 +325,192 @@
         ***********************************-->
         <div class="content-body">
 			<div class="container-fluid">
-
+				<!-- <div class="card">
+					<div class="project-info">
+						<div class="col-xl-3 col-xxl-3 my-2 col-lg-4 col-sm-6">
+							<h4 class="title font-w600 mb-3"><a href="post-details.html" class="text-black">DECA Meeting</a></h4>
+							<div class="text-dark"><i class="fa fa-calendar-o mr-3" aria-hidden="true"></i>Sept 8th, 2021</div>
+						</div>
+						<div class="col-xl-2 my-2 col-xxl-3 col-lg-4 col-sm-6">
+							<div class="d-flex align-items-center">
+								<div class="project-media">
+									<img src="images/projects/Untitled-2.jpg" alt="">
+								</div>
+								<div class="ml-3">
+									<span>Person in charge</span>
+									<h5 class="mb-0 pt-1 fs-18 font-w500 text-black">Yoast Esec</h5>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 my-2 col-xxl-3 col-lg-6 col-sm-6">
+							<div class="d-flex align-items-center">
+								<div class="power-ic">
+									<i class="fa fa-bolt" aria-hidden="true"></i>
+								</div>
+								<div class="ml-3">
+									<span>Deadline</span>
+									<h5 class="mb-0 pt-1 font-w500 text-black">Tuesday,Sep 29th 2020</h5>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-2 my-2 col-xxl-3 col-lg-6 col-sm-6">
+							<div class="d-flex project-status align-items-center">
+								<a href="javascript:void(0);" class="btn btn-warning light status-btn">Pending</a>
+								 <div class="dropdown">
+									<a href="javascript:void(0);" data-toggle="dropdown" aria-expanded="false">
+										<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+											<path d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+											<path d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+										</svg>
+									</a>
+									<div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(24px, 21px, 0px);">
+										<a class="dropdown-item" href="javascript:void(0);">Edit</a>
+										<a class="dropdown-item" href="javascript:void(0);">Delete</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> -->
+				<div class="row">
+					<div class="col-xl-8 col-md-12">
+					   <h2>Announcements</h2>
+					   <ul id="upcoming" class="timeline">
+						  <li>
+							<div class="card">
+								<div class="project-info">
+									<div class="col-lg-2 my-3 col-sm-4">
+										<div class="mx-auto plus-icon">
+											<h1 id="checkLoad" style="font-family: Montserrat, sans-serif; font-style: italic;" class="pt-2 text-center date-text">26</h1>
+										 </div>
+									</div>
+									<div class="col-lg-4 my-3 col-sm-6">
+										<h4 class="title font-w600 mb-3"><a href="post-details.html" class="text-black">DECA Meeting</a></h4>
+										<div class="text-dark"><i class="fa fa-calendar-o mr-3" aria-hidden="true"></i>Sept 8th, 2021</div>
+									</div>
+									<div class="col-lg-4 my-3 col-sm-6 offset-md-2">
+										<div class="d-flex project-status align-items-center float-right">
+											<a href="javascript:void(0);" class="btn btn-primary">Read More</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						  </li>
+						  <li>
+							<div class="card">
+								<div class="project-info">
+									<div class="col-lg-2 my-3 col-sm-4">
+										<div class="mx-auto plus-icon">
+											<h1 id="checkLoad" style="font-family: Montserrat, sans-serif; font-style: italic;" class="pt-2 text-center date-text">26</h1>
+										 </div>
+									</div>
+									<div class="col-lg-4 my-3 col-sm-6">
+										<h4 class="title font-w600 mb-3"><a href="post-details.html" class="text-black">DECA Meeting</a></h4>
+										<div class="text-dark"><i class="fa fa-calendar-o mr-3" aria-hidden="true"></i>Sept 8th, 2021</div>
+									</div>
+									<div class="col-lg-4 my-3 col-sm-6 offset-md-2">
+										<div class="d-flex project-status align-items-center float-right">
+											<a href="javascript:void(0);" class="btn btn-primary">Read More</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						  </li>
+						  <li>
+							<div class="card">
+								<div class="project-info">
+									<div class="col-lg-2 my-3 col-sm-4">
+										<div class="mx-auto plus-icon">
+											<h1 id="checkLoad" style="font-family: Montserrat, sans-serif; font-style: italic;" class="pt-2 text-center date-text">26</h1>
+										 </div>
+									</div>
+									<div class="col-lg-4 my-3 col-sm-6">
+										<h4 class="title font-w600 mb-3"><a href="post-details.html" class="text-black">DECA Meeting</a></h4>
+										<div class="text-dark"><i class="fa fa-calendar-o mr-3" aria-hidden="true"></i>Sept 8th, 2021</div>
+									</div>
+									<div class="col-lg-4 my-3 col-sm-6 offset-md-2">
+										<div class="d-flex project-status align-items-center float-right">
+											<a href="javascript:void(0);" class="btn btn-primary">Read More</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+					   </ul>
+					</div>
+					<div class="col-xl-4 col-md-12">
+					   <h2>Past Drops</h2>
+					   <ul id="events-past">
+						  <li>
+							 <div class="card contact-bx text-left p-3 m-2">
+								<div class="row">
+								   <div class="col-2">
+									  <div class="mx-auto d-block plus-icon"><i class="fa fa-window-close"></i></div>
+								   </div>
+								   <div class="col-10">
+									  <h4><span class="summary">Kith Monday Program</span></h4>
+									  <small class="d-block text-secondary"><span class="date">Sunday September 19, 2021</span></small>
+								   </div>
+								</div>
+							 </div>
+						  </li>
+						  <li>
+							 <div class="card contact-bx text-left p-3 m-2">
+								<div class="row">
+								   <div class="col-2">
+									  <div class="mx-auto d-block plus-icon"><i class="fa fa-window-close"></i></div>
+								   </div>
+								   <div class="col-10">
+									  <h4><span class="summary">Kith Monday Program</span></h4>
+									  <small class="d-block text-secondary"><span class="date">Sunday September 12, 2021</span></small>
+								   </div>
+								</div>
+							 </div>
+						  </li>
+						  <li>
+							 <div class="card contact-bx text-left p-3 m-2">
+								<div class="row">
+								   <div class="col-2">
+									  <div class="mx-auto d-block plus-icon"><i class="fa fa-window-close"></i></div>
+								   </div>
+								   <div class="col-10">
+									  <h4><span class="summary">Kith Monday Program</span></h4>
+									  <small class="d-block text-secondary"><span class="date">Sunday September 5, 2021</span></small>
+								   </div>
+								</div>
+							 </div>
+						  </li>
+						  <li>
+							 <div class="card contact-bx text-left p-3 m-2">
+								<div class="row">
+								   <div class="col-2">
+									  <div class="mx-auto d-block plus-icon"><i class="fa fa-window-close"></i></div>
+								   </div>
+								   <div class="col-10">
+									  <h4><span class="summary">Kith Monday Program</span></h4>
+									  <small class="d-block text-secondary"><span class="date">Sunday August 29, 2021</span></small>
+								   </div>
+								</div>
+							 </div>
+						  </li>
+						  <li>
+							 <div class="card contact-bx text-left p-3 m-2">
+								<div class="row">
+								   <div class="col-2">
+									  <div class="mx-auto d-block plus-icon"><i class="fa fa-window-close"></i></div>
+								   </div>
+								   <div class="col-10">
+									  <h4><span class="summary">Kith Monday Program</span></h4>
+									  <small class="d-block text-secondary"><span class="date">Sunday August 22, 2021</span></small>
+								   </div>
+								</div>
+							 </div>
+						  </li>
+					   </ul>
+					</div>
+				 </div>
+					
 			</div>
 		</div>
         <!--**********************************
