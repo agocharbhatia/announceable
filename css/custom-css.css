@@ -10,3 +10,13 @@ div.form-group > input.custom-input {
 div.filter-column {
     border-left: 1px solid #636363;
 }
+
+label.filter-label {
+    text-align: center;
+    display: block;
+}
+
+.default-input {
+    background: #2F363E !important;
+    border: 3px solid #2F363E !important;
+}
