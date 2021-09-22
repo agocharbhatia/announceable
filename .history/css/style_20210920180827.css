@@ -23191,12 +23191,12 @@ $color_pallate_15: #ed0b4c; */
     background-color: #217cb1;
     border-color: #2164b1; }
   [data-primary="color_3"] .btn-primary:focus {
-    box-shadow: 0 0 0 0.2rem rgba(24, 98, 182, 0.5) !important; }
+    box-shadow: 0 0 0 0.2rem rgba(67, 220, 128, 0.5) !important; }
   [data-primary="color_3"] .btn-outline-primary {
     color: #1CA7F5;
     border-color: #1CA7F5; }
     [data-primary="color_3"] .btn-outline-primary:focus {
-      box-shadow: 0 0 0 0.2rem rgba(67, 138, 220, 0.5) !important; }
+      box-shadow: 0 0 0 0.2rem rgba(67, 220, 128, 0.5) !important; }
     [data-primary="color_3"] .btn-outline-primary:hover {
       background-color: #1CA7F5;
       border-color: #1CA7F5;
@@ -35942,9 +35942,8 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
     font-weight: 400;
     color: #7e7e7e !important; }
     [data-theme-version="dark"] .bootstrap-select .btn {
-      border-color: #2F363E !important;
-      background: #2F363E !important;
-      }
+      border-color: #636363 !important;
+      background: #24292D !important; }
     .bootstrap-select .btn:active, .bootstrap-select .btn:focus, .bootstrap-select .btn:hover {
       outline: none !important;
       outline-offset: 0; }

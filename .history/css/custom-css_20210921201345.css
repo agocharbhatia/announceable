@@ -1,0 +1,9 @@
+.header-right .header-profile > a.nav-link .header-info {
+    text-align: right;
+}
+
+div.form-group > label.filter-label {
+    display: block;
+    text-align: center;
+    font-size: x-large;
+}

@@ -3,6 +3,5 @@
 }
 
 div.form-group > input.custom-input {
-    background: #2F363E !important;
-    border-color: #2F363E !important;
+    background: #2F363E;
 }

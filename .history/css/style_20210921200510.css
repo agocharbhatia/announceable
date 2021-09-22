@@ -35942,9 +35942,8 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
     font-weight: 400;
     color: #7e7e7e !important; }
     [data-theme-version="dark"] .bootstrap-select .btn {
-      border-color: #2F363E !important;
-      background: #2F363E !important;
-      }
+      border-color: #636363 !important;
+      background: #828690 !important; }
     .bootstrap-select .btn:active, .bootstrap-select .btn:focus, .bootstrap-select .btn:hover {
       outline: none !important;
       outline-offset: 0; }

@@ -33402,7 +33402,8 @@ $color_pallate_15: #ed0b4c; */
 [data-theme-version="dark"] .custom-select {
   border-color: #636363;
   color: #828690;
-  background: #24292D; }
+  background: #828690;
+  }
 [data-theme-version="dark"] .nav-tabs {
   border-color: #636363; }
 [data-theme-version="dark"] .mail-list .list-group-item.active i {
@@ -35942,9 +35943,8 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
     font-weight: 400;
     color: #7e7e7e !important; }
     [data-theme-version="dark"] .bootstrap-select .btn {
-      border-color: #2F363E !important;
-      background: #2F363E !important;
-      }
+      border-color: #636363 !important;
+      background: #24292D !important; }
     .bootstrap-select .btn:active, .bootstrap-select .btn:focus, .bootstrap-select .btn:hover {
       outline: none !important;
       outline-offset: 0; }
