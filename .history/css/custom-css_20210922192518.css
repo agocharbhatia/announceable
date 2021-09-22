@@ -1,0 +1,26 @@
+.header-right .header-profile > a.nav-link .header-info {
+    text-align: right;
+}
+
+div.form-group > input.custom-input {
+    background: #2F363E !important;
+    border-color: #2F363E !important;
+}
+
+div.filter-column {
+    border-left: 1px solid #636363;
+}
+
+label.filter-label {
+    text-align: center;
+    display: block;
+}
+
+.default-input {
+    background: #2F363E !important;
+    border: 3px solid #2F363E !important;
+}
+
+.pfp-icon {
+    
+}

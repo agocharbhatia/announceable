@@ -288,24 +288,24 @@
             ***********************************-->
 		<div class="content-body">
 			<div class="container">
-				<form class="settings-form">
 				<div class="row">
 					<div class="col-6">
 						<ul>
 							<li>
 								<div class="px-5 py-3 m-3">
-									
+									<form>
 										<div class="form-group">
 											<label class="filter-label" for="inputGrade">Name</label>
 											<div class="input-group mb-3">
 												<input type="text" class="form-control default-input" placeholder="Name">
 											</div>
 										</div>
-									
+									</form>
 								</div>
 							</li>
 							<li>
 								<div class="px-5 py-3 m-3">
+									<form>
 										<div class="form-group">
 											<label class="filter-label" for="inputGrade">Grade</label>
 											<select class="form-control default-select" name="inputGrade" id="inputGrade">
@@ -316,27 +316,31 @@
 												<option>Grade 12</option>
 											</select>
 										</div>
+									</form>
 								</div>
 							</li>
 							<li>
 								<div class="px-5 py-3 m-3">
+									<form>
 										<div class="form-group">
 											<label class="filter-label" for="inputGrade">Enrolled Clubs</label>
 											<select class="form-control default-select" name="inputGrade" id="inputGrade">
 												<option value="" disabled selected hidden>Select Clubs</option>
-												<option>DECA</option>
-												<option>HOSA</option>
-												<option>VEX</option>
-												<option>Hack Club</option>
+												<option>Grade 9</option>
+												<option>Grade 10</option>
+												<option>Grade 11</option>
+												<option>Grade 12</option>
 											</select>
 										</div>
+									</form>
 								</div>
 							</li>
 							<li>
 								<div class="px-5 py-3 m-3">
+									<form>
 										<div class="form-group">
 											<label class="filter-label" for="inputGender">Gender</label>
-											<div class="row">
+											<!-- <div class="row">
 												<div class="col-6 text-center">
 													<div class="custom-control custom-checkbox mb-3">
 														<input type="checkbox" class="custom-control-input" id="maleCheckbox">
@@ -349,42 +353,18 @@
 														<label class="custom-control-label" for="femaleCheckbox"> Female</label>
 													</div>
 												</div>
-											</div>
+											</div> -->
+											<label class="radio-inline mr-3"><input type="radio" name="maleRadio">Male</label>
 										</div>
+									</form>
 								</div>
 							</li>
 						</ul>
 					</div>
 					<div class="col-6">
-						<ul>
-							<li>
-								<div class="px-5 m-3">
-									<div class="form-group text-center">
-										<span class="flaticon-381-user-4 pfp-icon"></span>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="px-5 m-2">
-									<div class="form-group text-center">
-										<button class="btn btn-primary">Upload Picture</button>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="px-5 m-2">
-									<div class="form-group text-center">
-										<button class="btn btn-danger">Remove Picture</button>
-									</div>
-								</div>
-							</li>
-						</ul>
+						
 					</div>
 				</div>
-				<div class="text-center">
-					<button class="btn btn-primary">Save</button>
-				</div>
-				</form>
 			</div>
 		</div>
 		<!--**********************************

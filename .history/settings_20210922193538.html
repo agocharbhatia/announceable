@@ -288,8 +288,9 @@
             ***********************************-->
 		<div class="content-body">
 			<div class="container">
-				<form class="settings-form">
+				<form>
 				<div class="row">
+					
 					<div class="col-6">
 						<ul>
 							<li>
@@ -324,10 +325,10 @@
 											<label class="filter-label" for="inputGrade">Enrolled Clubs</label>
 											<select class="form-control default-select" name="inputGrade" id="inputGrade">
 												<option value="" disabled selected hidden>Select Clubs</option>
-												<option>DECA</option>
-												<option>HOSA</option>
-												<option>VEX</option>
-												<option>Hack Club</option>
+												<option>Grade 9</option>
+												<option>Grade 10</option>
+												<option>Grade 11</option>
+												<option>Grade 12</option>
 											</select>
 										</div>
 								</div>
@@ -378,11 +379,29 @@
 									</div>
 								</div>
 							</li>
+							<li>
+								<div class="px-5 py-3 m-3">
+										<div class="form-group">
+											<label class="filter-label" for="inputGender">Theme</label>
+											<div class="row">
+												<div class="col-6 text-center">
+													<div class="custom-control custom-checkbox mb-3">
+														<input type="checkbox" class="custom-control-input" id="darkCheckbox">
+														<label class="custom-control-label" for="darkCheckbox"> Dark</label>
+													</div>
+												</div>
+												<div class="col-6 text-center">
+													<div class="custom-control custom-checkbox mb-3">
+														<input type="checkbox" class="custom-control-input" id="lightCheckbox">
+														<label class="custom-control-label" for="lightCheckbox"> Light</label>
+													</div>
+												</div>
+											</div>
+										</div>
+								</div>
+							</li>
 						</ul>
 					</div>
-				</div>
-				<div class="text-center">
-					<button class="btn btn-primary">Save</button>
 				</div>
 				</form>
 			</div>

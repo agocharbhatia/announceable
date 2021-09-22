@@ -51,9 +51,3 @@ label.filter-label {
 .dark-checkbox .dark-control-input:disabled:indeterminate~.dark-control-label::before {
     background-color: rgba(67, 220, 128, 0.5);
 }
-
-.settings-form {
-    border-radius: 3%;
-    background: #131618;
-    padding: 5%;
-}
