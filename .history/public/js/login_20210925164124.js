@@ -5,6 +5,7 @@ $(document).ready(function() {
 
     document.getElementById('login-btn').addEventListener('click', login);
     
+    if (user)
     function login() {
         console.log('btn clicked')
         firebase.auth().signInWithPopup(provider).then(res=>{

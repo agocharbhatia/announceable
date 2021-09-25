@@ -5,6 +5,13 @@ $(document).ready(function() {
 
     document.getElementById('login-btn').addEventListener('click', login);
     
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            
+        } else {
+            console.log('not signed in')
+        }
+    })
     function login() {
         console.log('btn clicked')
         firebase.auth().signInWithPopup(provider).then(res=>{
