@@ -27,7 +27,7 @@ $(document).ready(function() {
     
     function login() {
         console.log('btn clicked')
-        firebase.auth().signInWithPopup(provider).then(res=>{
+        firebase.auth().signInWithRedirect(provider).then(res=>{
             console.log(res)
             const email = user.email;
             if (email.includes('@pdsb.net')) {
