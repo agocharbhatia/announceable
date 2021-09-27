@@ -57,3 +57,15 @@ label.filter-label {
     background: #131618;
     padding: 5%;
 }
+
+.add-announcement {
+    background: #1CA7F5;
+    display: block;
+    padding: 20px 20px;
+    border-radius: 1.375rem;
+    position: relative;
+    text-align: center;
+    color: #fff;
+    margin: 30px 20px 15px;
+}
+
