@@ -363,15 +363,15 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						<form>
+						<form id="newAnnouncementForm">
 							<div class="form-group">
 								<label for="titleInput">Title</label>
-								<input type="text" class="form-control" id="titleInput"
+								<input type="text" class="form-control" id="titleInput" name="titleInput"
 									placeholder="Enter Title Here...">
 							</div>
 							<div class="form-group">
 								<label for="messageTextarea">Message</label>
-								<textarea type="text" class="form-control" id="messageTextarea"
+								<textarea type="text" class="form-control" id="messageTextarea" name="messageTextarea"
 									placeholder="Enter Message Here..." rows="7"></textarea>
 							</div>
 							<div class="row">
@@ -446,11 +446,12 @@
 									</div>
 								</div>
 							</div>
-						</form>
+
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Save changes</button>
+						<button type="submit" class="btn btn-primary" id="submit-announcement">Save changes</button>
+						</form>
 					</div>
 				</div>
 			</div>
