@@ -477,23 +477,16 @@ $('#editAnnouncementForm').submit(function(event) {
             })
         })
         .catch(function(err) {
-            console.log('Fail' + err.message)
+            console.error('Fail' + err.message)
         });
 });
 
-// function deleteAnnouncement() {
-//     // let deleteBtn = e.relatedTarget;
-//     // let uuid = deleteBtn.getAttribute('data-uuid');
-
-//     let announcementRef = firebase.database().ref('announcements/' + uuid);
-//     console.log('uuid')
-
-// }
-
-$('#upcoming').on('click', 'a.delete-btn', function(e) {
+//Delete Announcement Function
+$('#upcoming').on('click', 'a.delete-btn', function() {
     let uuid = $(this).data('uuid');
     console.log(uuid);
     let announcementRef = firebase.database().ref('announcements/' + uuid);
+
     announcementRef.remove()
         .then(function() {
             console.log('Successfully Deleted')
@@ -522,5 +515,4 @@ $('#upcoming').on('click', 'a.delete-btn', function(e) {
         .catch(function(err) {
             console.log('Fail' + err.message)
         });
-
 })
