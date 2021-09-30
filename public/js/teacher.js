@@ -11,7 +11,7 @@ function logout() {
     })
 }
 
-function showAnnouncements(data) {
+function showAnnouncements(data, uuid) {
     // <li>
     //  <div class="card">
     //      <div class="project-info">
@@ -148,7 +148,7 @@ function showAnnouncements(data) {
     let divDropdownMenu = document.createElement('div');
     divDropdownMenu.classList.add('dropdown-menu', 'dropdown-menu-right');
     divDropdownMenu.setAttribute('x-placement', 'bottom-end');
-    $(divDropdownMenu).css({'position': 'absolute', 'will-change': 'transform', 'top': '0px', 'left': '0px', 'transform': 'translate3d(24px, 21px, 0px)'});
+    $(divDropdownMenu).css({ 'position': 'absolute', 'will-change': 'transform', 'top': '0px', 'left': '0px', 'transform': 'translate3d(24px, 21px, 0px)' });
 
     // var newAnnouncement = {
     //     "title": title,
@@ -176,10 +176,12 @@ function showAnnouncements(data) {
     aEdit.setAttribute('data-grade12', data.grade['12']);
     aEdit.setAttribute('data-male', data.gender.male);
     aEdit.setAttribute('data-female', data.gender.female);
-    
+    aEdit.setAttribute('data-uuid', uuid);
+
     let aDelete = document.createElement('a');
     aDelete.classList.add('dropdown-item');
     aDelete.setAttribute('href', 'javascript:void(0)');
+    aDelete.id = 'deleteAnnouncement';
     aDelete.innerHTML = 'Delete';
     //Column 3 End
 
@@ -273,11 +275,11 @@ $(document).ready(function() {
             var announcements = snapshot.toJSON();
             //List Announcements with Database Data
             for (let i = Object.keys(announcements).length - 1; i >= 0; i--) {
-                let keys = Object.keys(announcements)[i];
+                let key = Object.keys(announcements)[i];
                 console.log(i)
-                console.log(announcements[keys]);
-                console.log(keys)
-                showAnnouncements(announcements[keys]);
+                console.log(announcements[key]);
+                console.log(key)
+                showAnnouncements(announcements[key], key);
             }
             // console.log(announcements);
         } else {
@@ -341,7 +343,7 @@ $('#newAnnouncementForm').submit(function(event) {
                         console.log(i)
                         console.log(announcements[keys]);
                         console.log(keys)
-                        showAnnouncements(announcements[keys]);
+                        showAnnouncements(announcements[keys], keys);
                     }
                     // console.log(announcements);
                 } else {
@@ -358,7 +360,7 @@ $('#newAnnouncementForm').submit(function(event) {
     event.preventDefault();
 });
 
-$('#editAnnouncement').on('show.bs.modal', function (event) {
+$('#editAnnouncement').on('show.bs.modal', function(event) {
     // var newAnnouncement = {
     //     "title": title,
     //     "message": message,
@@ -380,17 +382,89 @@ $('#editAnnouncement').on('show.bs.modal', function (event) {
     let gr12 = button.data('grade12');
     let male = button.data('male');
     let female = button.data('female');
+    let uuid = button.data('uuid');
 
     let modal = $(this);
-    modal.find('#editTitle').text(title);
-    modal.find('#editTextarea').text(message);
-    modal.find('#editClub').text(club);
+    modal.find('#editTitle').val(title);
+    modal.find('#editTextarea').val(message);
+    modal.find('#editClub').val(club).change();
+    modal.find('#editDatePicker').val(date).change();
 
-    modal.find('#edit9Checkbox').text(gr9);
-    modal.find('#edit10Checkbox').text(gr10);
-    modal.find('#edit11Checkbox').text(gr11);
-    modal.find('#edit12Checkbox').text(gr12);
+    modal.find('#edit9Checkbox').prop('checked', gr9);
+    modal.find('#edit10Checkbox').prop('checked', gr10);
+    modal.find('#edit11Checkbox').prop('checked', gr11);
+    modal.find('#edit12Checkbox').prop('checked', gr12);
 
-    modal.find('#editmaleFormCheckbox').text(male);
-    modal.find('#editfemaleFormCheckbox').text(female);
+    modal.find('#editmaleFormCheckbox').prop('checked', male);
+    modal.find('#editfemaleFormCheckbox').prop('checked', female);
+
+    modal.find('#uuid-label').val(uuid);
+    console.log(uuid);
+});
+
+//Send Edited Announement to Database
+$('#editAnnouncementForm').submit(function(event) {
+    event.preventDefault();
+    console.log('Submit Edit to Firebase')
+
+    var title = $('#editTitle').val();
+
+    var message = $('#editTextarea').val();
+
+    var club = $('#editClub').val();
+
+    var gr9 = $('#edit9Checkbox').prop('checked');
+    var gr10 = $('#edit10Checkbox').prop('checked');
+    var gr11 = $('#edit11Checkbox').prop('checked');
+    var gr12 = $('#edit12Checkbox').prop('checked');
+
+    var male = $('#editmaleFormCheckbox').prop('checked');
+    var female = $('#editfemaleFormCheckbox').prop('checked');
+
+    var date = $('#editDatePicker').val();
+    console.log(date)
+
+    let uuid = $('#uuid-label').val();
+    console.log(uuid);
+
+    var editedAnnouncement = {
+        "title": title,
+        "message": message,
+        "club": club,
+        "date": date,
+        "grade": { "9": gr9, "10": gr10, "11": gr11, "12": gr12 },
+        "gender": { "male": male, "female": female }
+    }
+
+    console.log(editedAnnouncement);
+
+    var announcementsRef = firebase.database().ref('announcements/' + uuid);
+    announcementsRef.update(editedAnnouncement)
+        .then(function() {
+            console.log('Successfully Edited')
+            var dbRef = firebase.database().ref();
+            dbRef.child('announcements').get().then((snapshot) => {
+                if (snapshot.exists()) {
+                    console.log('exists')
+                    var announcements = snapshot.toJSON();
+                    //List Announcements with Database Data
+                    $('#upcoming').empty();
+                    for (let i = Object.keys(announcements).length - 1; i >= 0; i--) {
+                        let keys = Object.keys(announcements)[i];
+                        console.log(i)
+                        console.log(announcements[keys]);
+                        console.log(keys)
+                        showAnnouncements(announcements[keys]);
+                    }
+                    // console.log(announcements);
+                } else {
+                    console.log('No Data Available')
+                }
+            }).catch((error) => {
+                console.error(error)
+            })
+        })
+        .catch(function(err) {
+            console.log('Fail' + err.message)
+        });
 });
