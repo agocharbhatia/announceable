@@ -108,7 +108,94 @@ function showAnnouncements(data) {
     btn.classList.add('btn', 'btn-primary');
     btn.setAttribute('href', 'javascript:void(0);');
     btn.innerHTML = 'Read More';
+
+    let divDropdown = document.createElement('div');
+    divDropdown.classList.add('dropdown', 'pl-3');
+
+    let aIcon = document.createElement('a');
+    aIcon.setAttribute('href', 'javascript:void(0)');
+    aIcon.setAttribute('data-toggle', 'dropdown');
+    aIcon.setAttribute('aria-expanded', 'false');
+
+    let svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('width', '24');
+    svg.setAttribute('height', '24');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('fill', 'none');
+    svg.setAttribute('xlmns', 'http://www.w3.org/2000/svg');
+
+    let path1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path1.setAttribute('d', 'M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z');
+    path1.setAttribute('stroke', '#575757');
+    path1.setAttribute('stroke-width', '2');
+    path1.setAttribute('stroke-linecap', 'round');
+    path1.setAttribute('stroke-linejoin', 'round');
+
+    let path2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path2.setAttribute('d', 'M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z');
+    path2.setAttribute('stroke', '#575757');
+    path2.setAttribute('stroke-width', '2');
+    path2.setAttribute('stroke-linecap', 'round');
+    path2.setAttribute('stroke-linejoin', 'round');
+
+    let path3 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path3.setAttribute('d', 'M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z');
+    path3.setAttribute('stroke', '#575757');
+    path3.setAttribute('stroke-width', '2');
+    path3.setAttribute('stroke-linecap', 'round');
+    path3.setAttribute('stroke-linejoin', 'round');
+
+    let divDropdownMenu = document.createElement('div');
+    divDropdownMenu.classList.add('dropdown-menu', 'dropdown-menu-right');
+    divDropdownMenu.setAttribute('x-placement', 'bottom-end');
+    $(divDropdownMenu).css({'position': 'absolute', 'will-change': 'transform', 'top': '0px', 'left': '0px', 'transform': 'translate3d(24px, 21px, 0px)'});
+
+    // var newAnnouncement = {
+    //     "title": title,
+    //     "message": message,
+    //     "club": club,
+    //     "date": date,
+    //     "grade": { "9": gr9, "10": gr10, "11": gr11, "12": gr12 },
+    //     "gender": { "male": male, "female": female }
+    // }
+
+    let aEdit = document.createElement('a');
+    aEdit.classList.add('dropdown-item');
+    aEdit.setAttribute('href', 'javascript:void(0)');
+    aEdit.setAttribute('data-toggle', 'modal');
+    aEdit.setAttribute('data-target', '#editAnnouncement');
+    aEdit.innerHTML = 'Edit';
+
+    aEdit.setAttribute('data-title', data.title);
+    aEdit.setAttribute('data-message', data.message);
+    aEdit.setAttribute('data-club', data.club);
+    aEdit.setAttribute('data-date', data.date);
+    aEdit.setAttribute('data-grade9', data.grade['9']);
+    aEdit.setAttribute('data-grade10', data.grade['10']);
+    aEdit.setAttribute('data-grade11', data.grade['11']);
+    aEdit.setAttribute('data-grade12', data.grade['12']);
+    aEdit.setAttribute('data-male', data.gender.male);
+    aEdit.setAttribute('data-female', data.gender.female);
+    
+    let aDelete = document.createElement('a');
+    aDelete.classList.add('dropdown-item');
+    aDelete.setAttribute('href', 'javascript:void(0)');
+    aDelete.innerHTML = 'Delete';
     //Column 3 End
+
+    /* <div class="dropdown pl-3">
+             <a href="javascript:void(0);" data-toggle="dropdown" aria-expanded="false">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        			<path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        			<path d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        			<path d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        		</svg>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(24px, 21px, 0px);">
+                <a class="dropdown-item" href="javascript:void(0);">Edit</a>
+                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+            </div>
+        </div> */
 
     //Column 1
     divDate.appendChild(date);
@@ -123,7 +210,17 @@ function showAnnouncements(data) {
     divProject.appendChild(divCol2);
 
     //Column 3
+    svg.appendChild(path1);
+    svg.appendChild(path2);
+    svg.appendChild(path3);
+    aIcon.appendChild(svg);
+    divDropdown.appendChild(aIcon);
+    divDropdownMenu.appendChild(aEdit);
+    divDropdownMenu.appendChild(aDelete);
+    divDropdown.appendChild(divDropdownMenu);
+
     divBtn.appendChild(btn);
+    divBtn.appendChild(divDropdown);
     divCol3.appendChild(divBtn);
     divProject.appendChild(divCol3);
 
@@ -259,4 +356,41 @@ $('#newAnnouncementForm').submit(function(event) {
         })
 
     event.preventDefault();
+});
+
+$('#editAnnouncement').on('show.bs.modal', function (event) {
+    // var newAnnouncement = {
+    //     "title": title,
+    //     "message": message,
+    //     "club": club,
+    //     "date": date,
+    //     "grade": { "9": gr9, "10": gr10, "11": gr11, "12": gr12 },
+    //     "gender": { "male": male, "female": female }
+    // }
+
+    let button = $(event.relatedTarget);
+
+    let title = button.data('title');
+    let message = button.data('message');
+    let club = button.data('club');
+    let date = button.data('date');
+    let gr9 = button.data('grade9');
+    let gr10 = button.data('grade10');
+    let gr11 = button.data('grade11');
+    let gr12 = button.data('grade12');
+    let male = button.data('male');
+    let female = button.data('female');
+
+    let modal = $(this);
+    modal.find('#editTitle').text(title);
+    modal.find('#editTextarea').text(message);
+    modal.find('#editClub').text(club);
+
+    modal.find('#edit9Checkbox').text(gr9);
+    modal.find('#edit10Checkbox').text(gr10);
+    modal.find('#edit11Checkbox').text(gr11);
+    modal.find('#edit12Checkbox').text(gr12);
+
+    modal.find('#editmaleFormCheckbox').text(male);
+    modal.find('#editfemaleFormCheckbox').text(female);
 });
