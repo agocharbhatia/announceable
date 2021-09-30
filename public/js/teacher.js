@@ -179,9 +179,10 @@ function showAnnouncements(data, uuid) {
     aEdit.setAttribute('data-uuid', uuid);
 
     let aDelete = document.createElement('a');
-    aDelete.classList.add('dropdown-item');
-    aDelete.setAttribute('href', 'javascript:void(0)');
-    aDelete.id = 'deleteAnnouncement';
+    aDelete.classList.add('dropdown-item', 'delete-btn');
+    aDelete.setAttribute('href', 'javascript:void(0);');
+    // aDelete.setAttribute('onclick', 'deleteAnnouncement(event);');
+    aDelete.setAttribute('data-uuid', uuid);
     aDelete.innerHTML = 'Delete';
     //Column 3 End
 
@@ -232,6 +233,17 @@ function showAnnouncements(data, uuid) {
     ul.appendChild(li);
 
 }
+
+function deleteAnnouncement(e) {
+    let deleteBtn = e.relatedTarget;
+    let uuid = deleteBtn.getAttribute('data-uuid');
+
+    let announcementRef = firebase.database().ref('announcements/' + uuid);
+    console.log(uuid)
+
+}
+
+
 
 $(document).ready(function() {
     //Check Auth
@@ -468,3 +480,47 @@ $('#editAnnouncementForm').submit(function(event) {
             console.log('Fail' + err.message)
         });
 });
+
+// function deleteAnnouncement() {
+//     // let deleteBtn = e.relatedTarget;
+//     // let uuid = deleteBtn.getAttribute('data-uuid');
+
+//     let announcementRef = firebase.database().ref('announcements/' + uuid);
+//     console.log('uuid')
+
+// }
+
+$('#upcoming').on('click', 'a.delete-btn', function(e) {
+    let uuid = $(this).data('uuid');
+    console.log(uuid);
+    let announcementRef = firebase.database().ref('announcements/' + uuid);
+    announcementRef.remove()
+        .then(function() {
+            console.log('Successfully Deleted')
+            var dbRef = firebase.database().ref();
+            dbRef.child('announcements').get().then((snapshot) => {
+                if (snapshot.exists()) {
+                    console.log('exists')
+                    var announcements = snapshot.toJSON();
+                    //List Announcements with Database Data
+                    $('#upcoming').empty();
+                    for (let i = Object.keys(announcements).length - 1; i >= 0; i--) {
+                        let keys = Object.keys(announcements)[i];
+                        console.log(i)
+                        console.log(announcements[keys]);
+                        console.log(keys)
+                        showAnnouncements(announcements[keys]);
+                    }
+                    // console.log(announcements);
+                } else {
+                    console.log('No Data Available')
+                }
+            }).catch((error) => {
+                console.error(error)
+            })
+        })
+        .catch(function(err) {
+            console.log('Fail' + err.message)
+        });
+
+})
