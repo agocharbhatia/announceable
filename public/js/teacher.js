@@ -1,9 +1,137 @@
+// Object.prototype.getByIndex = function(index) {
+//     return this[Object.keys(this)[index]];
+// };
+
+
 function logout() {
     firebase.auth().signOut().then(() => {
         window.location.replace("/login.html")
     }).catch((error) => {
         console.log(error)
     })
+}
+
+function showAnnouncements(data) {
+    // <li>
+    //  <div class="card">
+    //      <div class="project-info">
+    //          <div class="col-lg-2 my-3 col-sm-4">
+    //              <div class="mx-auto plus-icon">
+    //                  <h1 id="checkLoad" style="font-family: Montserrat, sans-serif; font-style: italic;" class="pt-2 text-center date-text">26</h1>
+    //              </div>
+    //          </div>
+    //             <div class="col-lg-4 my-3 col-sm-6">
+    //                 <h4 class="title font-w600 mb-3"><a href="post-details.html" class="text-black">DECA Meeting</a></h4>
+    //                 <div class="text-dark" style="font-weight: bold;"><i class="fa fa-calendar-o mr-3" style="font-weight: bold;" aria-hidden="true"></i>Sept 8th, 2021</div>
+    //             </div>
+    //             <div class="col-lg-4 my-3 col-sm-6 offset-md-2">
+    //                 <div class="d-flex project-status align-items-center float-right"> <a href="javascript:void(0);" class="btn btn-primary">Read More</a>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     </div>
+    // </li>
+
+    // let title = data.title;
+    // let date = data.date;
+
+    let day = data.date;
+    day = day.substring(0, 2);
+
+    let ul = document.getElementById('upcoming');
+    let li = document.createElement('li');
+
+    let divCard = document.createElement('div');
+    divCard.classList.add('card');
+
+    let divProject = document.createElement('div');
+    divProject.classList.add('project-info');
+
+    //Column 1 Start
+    let divCol1 = document.createElement('div');
+    divCol1.classList.add('col-lg-2', 'my-3', 'col-sm-4');
+
+    let divDate = document.createElement('div');
+    divDate.classList.add('mx-auto', 'plus-icon');
+
+    let date = document.createElement('h1');
+    date.classList.add('pt-2', 'text-center', 'date-text');
+    $(date).css({ 'font-family': 'Montserrat, sans-serif', 'font-style': 'italic' });
+    date.innerHTML = day;
+    //Column 1 End
+
+    //Column 2 Start
+    let divCol2 = document.createElement('div');
+    divCol2.classList.add('col-lg-4', 'my-3', 'col-sm-6');
+
+    let title = document.createElement('h4');
+    title.classList.add('title', 'font-w600', 'mb-3', 'text-nowrap');
+    title.innerHTML = data.title;
+
+    let divFullDate = document.createElement('div');
+    divFullDate.classList.add('text-dark');
+    $(divFullDate).css('font-weight', 'bold');
+
+    let fullDate = document.createElement('a');
+    fullDate.innerHTML = data.date;
+
+    let calendarIcon = document.createElement('i');
+    calendarIcon.classList.add('fa', 'fa-calendar-o', 'mr-3');
+    calendarIcon.setAttribute('aria-hidden', 'true');
+    $(calendarIcon).css('font-weight', 'bold');
+
+    //Column 2 End
+    {
+        /* <div class="dropdown pl-3">
+             <a href="javascript:void(0);" data-toggle="dropdown" aria-expanded="false">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        			<path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        			<path d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        			<path d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        		</svg>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(24px, 21px, 0px);">
+                <a class="dropdown-item" href="javascript:void(0);">Edit</a>
+                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+            </div>
+        </div> */
+    }
+
+    //Column 3 Start
+    let divCol3 = document.createElement('div');
+    divCol3.classList.add('col-lg-4', 'my-3', 'col-sm-6', 'offset-md-2');
+
+    let divBtn = document.createElement('div');
+    divBtn.classList.add('d-flex', 'project-status', 'align-items-center', 'float-right');
+
+    let btn = document.createElement('a');
+    btn.classList.add('btn', 'btn-primary');
+    btn.setAttribute('href', 'javascript:void(0);');
+    btn.innerHTML = 'Read More';
+    //Column 3 End
+
+    //Column 1
+    divDate.appendChild(date);
+    divCol1.appendChild(divDate);
+    divProject.appendChild(divCol1);
+
+    //Column 2
+    divFullDate.appendChild(calendarIcon);
+    divFullDate.appendChild(fullDate);
+    divCol2.appendChild(title);
+    divCol2.appendChild(divFullDate);
+    divProject.appendChild(divCol2);
+
+    //Column 3
+    divBtn.appendChild(btn);
+    divCol3.appendChild(divBtn);
+    divProject.appendChild(divCol3);
+
+    //Base
+    divCard.appendChild(divProject);
+    li.appendChild(divCard);
+    ul.appendChild(li);
+
 }
 
 $(document).ready(function() {
@@ -47,8 +175,12 @@ $(document).ready(function() {
         if (snapshot.exists()) {
             var announcements = snapshot.toJSON();
             //List Announcements with Database Data
-            for (let i = 0; i < announcements.length; i++) {
-                console.log(announcements[i])
+            for (let i = Object.keys(announcements).length - 1; i >= 0; i--) {
+                let keys = Object.keys(announcements)[i];
+                console.log(i)
+                console.log(announcements[keys]);
+                console.log(keys)
+                showAnnouncements(announcements[keys]);
             }
             // console.log(announcements);
         } else {
@@ -57,9 +189,6 @@ $(document).ready(function() {
     }).catch((error) => {
         console.error(error)
     })
-
-
-
 });
 
 //Logout Function
@@ -83,12 +212,16 @@ $('#newAnnouncementForm').submit(function(event) {
     var male = $('#maleFormCheckbox').prop('checked');
     var female = $('#femaleFormCheckbox').prop('checked');
 
+    var date = $('#datepicker').val();
+    console.log(date)
+
     let uuid = Date.now();
 
     var newAnnouncement = {
         "title": title,
         "message": message,
         "club": club,
+        "date": date,
         "grade": { "9": gr9, "10": gr10, "11": gr11, "12": gr12 },
         "gender": { "male": male, "female": female }
     }
@@ -99,6 +232,27 @@ $('#newAnnouncementForm').submit(function(event) {
     announcementsRef.set(newAnnouncement)
         .then(function() {
             console.log('Success')
+            var dbRef = firebase.database().ref();
+            dbRef.child('announcements').get().then((snapshot) => {
+                if (snapshot.exists()) {
+                    console.log('exists')
+                    var announcements = snapshot.toJSON();
+                    //List Announcements with Database Data
+                    $('#upcoming').empty();
+                    for (let i = Object.keys(announcements).length - 1; i >= 0; i--) {
+                        let keys = Object.keys(announcements)[i];
+                        console.log(i)
+                        console.log(announcements[keys]);
+                        console.log(keys)
+                        showAnnouncements(announcements[keys]);
+                    }
+                    // console.log(announcements);
+                } else {
+                    console.log('No Data Available')
+                }
+            }).catch((error) => {
+                console.error(error)
+            })
         })
         .catch(function(err) {
             console.log('Fail' + err.message)
