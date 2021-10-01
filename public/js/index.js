@@ -173,3 +173,22 @@ $(document).ready(function() {
         })
     }
 });
+
+//Search Function
+$('#search-bar').keyup(function() {
+    let search = $(this).val().toUpperCase();
+    let annsLen = $('#upcoming li').length;
+
+    for (let i = 0; i < annsLen; i++) {
+        let card = $('#upcoming').children('li').eq(i);
+        let title = $('#upcoming').children('li').eq(i).children('div').children('div').children('div')
+            .first().next().children('h4').text();
+        if (title.toUpperCase().indexOf(search) != -1) {
+            console.log(title + ' matches')
+            card.css('display', 'list-item');
+        } else {
+            console.log(title + ' dont match')
+            card.css('display', 'none');
+        }
+    }
+});
