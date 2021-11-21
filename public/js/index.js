@@ -22,8 +22,8 @@ function showAnnouncements(data) {
     // let title = data.title;
     // let date = data.date;
 
-    let day = data.date;
-    day = day.substring(0, 2);
+    let day = data.date.substring(0, 2);
+    // day = day.substring(0, 2);
 
     let ul = document.getElementById('upcoming');
     let li = document.createElement('li');
@@ -109,18 +109,42 @@ function showAnnouncements(data) {
 
 }
 
+// function displayTeacherLink() {
+//     // <li class="">
+//     //     <a href="teacher_index.html" class="ai-icon" aria-expanded="false"> <i class="flaticon-381-settings"></i> <span class="nav-text">Teacher Dashboard</span> </a>
+//     // </li>
+
+//     let li = document.createElement('li');
+    
+//     let a = document.createElement('a');
+//     a.setAttribute('href', 'teacher_index.html');
+//     a.classList.add('ai-icon');
+//     a.setAttribute('aria-expanded', 'false');
+
+//     let i = document.createElement('i');
+//     i.classList.add('flaticon-381-settings');
+    
+//     let span = document
+// }
+
 $(document).ready(function() {
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
-            console.log('logged in')
+            console.log('logged in');
+            const nameElement = document.getElementById("userName");
+            const roleElement = document.getElementById("userRole");
+            const imgSrc = document.getElementById("profilePicture");
+
             let displayName = user.displayName;
             const photoURL = user.photoURL;
             const email = user.email;
 
             if (email.includes('@pdsb.net')) {
                 //Continue
+                document.getElementById('teacherLink').style.display = "none";    
+                roleElement.innerHTML = 'Student';
             } else if (email.includes('@peelsb.net')) {
-                window.location.replace('/teacher_index.html')
+                roleElement.innerHTML = 'Teacher';
             } else {
                 firebase.auth().signOut().then(() => {
                     alert('You need a PDSB Account')
@@ -128,16 +152,12 @@ $(document).ready(function() {
                 }).catch((error) => {
                     console.log(error)
                 })
-
             }
-
-            const nameElement = document.getElementById("user-name");
-            const imgSrc = document.getElementById("profile-picture");
-
+            
             displayName = displayName.substring(0, 2)
 
-            nameElement.innerHTML = displayName
-            imgSrc.src = photoURL
+            nameElement.innerHTML = displayName;
+            imgSrc.src = photoURL;
         } else {
             window.location.replace("/login.html")
         }
@@ -153,7 +173,7 @@ $(document).ready(function() {
                 console.log(i)
                 console.log(announcements[keys]);
                 console.log(keys)
-                showAnnouncements(announcements[keys]);
+                // showAnnouncements(announcements[keys]);
             }
             // console.log(announcements);
         } else {
@@ -178,17 +198,35 @@ $(document).ready(function() {
 $('#search-bar').keyup(function() {
     let search = $(this).val().toUpperCase();
     let annsLen = $('#upcoming li').length;
+    let matches = 0;
 
     for (let i = 0; i < annsLen; i++) {
         let card = $('#upcoming').children('li').eq(i);
         let title = $('#upcoming').children('li').eq(i).children('div').children('div').children('div')
             .first().next().children('h4').text();
         if (title.toUpperCase().indexOf(search) != -1) {
-            console.log(title + ' matches')
+            // console.log(title + ' matches');
             card.css('display', 'list-item');
+            matches++;
         } else {
-            console.log(title + ' dont match')
+            // console.log(title + ' dont match');
             card.css('display', 'none');
         }
     }
+    if (matches == 0) {
+        console.log('no matches')
+    }
 });
+
+//FILTER FORM
+document.getElementById('filterGrade').addEventListener('change', filterAnnouncements));
+document.getElementById('filterClub').addEventListener('change', filterAnnouncements);
+document.getElementById('filterMaleCheckbox').addEventListener('change', filterAnnouncements);
+document.getElementById('filterFemaleCheckbox').addEventListener('change', filterAnnouncements);
+document.getElementById('filterDate').addEventListener('change', filterAnnouncements);
+
+// $('#resetGrade').change(filterAnnouncements)
+
+function filterAnnouncements() {
+    console.log('new value ' + this.value)
+}

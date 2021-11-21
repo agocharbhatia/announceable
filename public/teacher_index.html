@@ -322,12 +322,15 @@
         <div class="deznav">
             <div class="deznav-scroll"> <a class="add-announcement btn btn-primary" href="javascript:void(0)" data-toggle="modal" data-target="#addAnnouncement">+ New Announcement</a>
                 <ul class="metismenu" id="menu">
-                    <li class="mm-active">
-                        <a href="teacher_index.html" class="ai-icon" aria-expanded="false"> <i class="flaticon-047-home"></i>
+                    <li class="">
+                        <a href="index.html" class="ai-icon" aria-expanded="false"> <i class="flaticon-047-home"></i>
                             <span class="nav-text">Homepage</span> </a>
                     </li>
                     <li class="">
                         <a href="teacher_settings.html" class="ai-icon" aria-expanded="false"> <i class="flaticon-381-settings-6"></i> <span class="nav-text">Settings</span> </a>
+                    </li>
+                    <li class="mm-active">
+                        <a href="teacher_index.html" class="ai-icon" aria-expanded="false"> <i class="flaticon-381-settings"></i> <span class="nav-text">Teacher Panel</span> </a>
                     </li>
                 </ul>
             </div>
@@ -1332,10 +1335,13 @@
     <!-- FIREBASE -->
     <script type="module">
         // Import the functions you need from the SDKs you need import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js"; import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-analytics.js"; // Your web
-        app's Firebase configuration // For Firebase JS SDK v7.20.0 and later, measurementId is optional const firebaseConfig = { apiKey: "AIzaSyAbx_mDgWijh9TNTR5CyuCQ4DPpklxFYdU", authDomain: "announceable.firebaseapp.com", projectId: "announceable",
-        storageBucket: "announceable.appspot.com", messagingSenderId: "77995326788", appId: "1:77995326788:web:b32e13dfc98a7ddc672b11", measurementId: "G-MQDMEVX9TH" }; // Initialize Firebase const app = initializeApp(firebaseConfig); const analytics
-        = getAnalytics(app);
-    </script>
+        //app's Firebase configuration // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = { apiKey: "AIzaSyAbx_mDgWijh9TNTR5CyuCQ4DPpklxFYdU", authDomain: "announceable.firebaseapp.com", projectId: "announceable",
+        storageBucket: "announceable.appspot.com", messagingSenderId: "77995326788", appId: "1:77995326788:web:b32e13dfc98a7ddc672b11", measurementId: "G-MQDMEVX9TH" };
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+     </script>
     <script src="./js/teacher.js"></script>
 </body>
 

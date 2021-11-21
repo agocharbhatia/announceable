@@ -255,9 +255,9 @@ $(document).ready(function() {
             const email = user.email;
 
             if (email.includes('@pdsb.net')) {
-                //Continue
+                // window.location.replace('/index.html')
             } else if (email.includes('@peelsb.net')) {
-                window.location.replace('/teacher_index.html')
+                // window.location.replace('/teacher_index.html')
             } else {
                 firebase.auth().signOut().then(() => {
                     alert('You need a PDSB Account')
