@@ -7,7 +7,7 @@ function logout() {
     firebase.auth().signOut().then(() => {
         window.location.replace("/login.html")
     }).catch((error) => {
-        console.log(error)
+        console.error(error)
     })
 }
 
@@ -174,8 +174,10 @@ function showAnnouncements(data, uuid) {
     aEdit.setAttribute('data-grade10', data.grade['10']);
     aEdit.setAttribute('data-grade11', data.grade['11']);
     aEdit.setAttribute('data-grade12', data.grade['12']);
+    aEdit.setAttribute('data-allGrade', data.grade.all)
     aEdit.setAttribute('data-male', data.gender.male);
     aEdit.setAttribute('data-female', data.gender.female);
+    aEdit.setAttribute('data-allGender', data.gender.all)
     aEdit.setAttribute('data-uuid', uuid);
 
     let aDelete = document.createElement('a');
@@ -234,22 +236,10 @@ function showAnnouncements(data, uuid) {
 
 }
 
-function deleteAnnouncement(e) {
-    let deleteBtn = e.relatedTarget;
-    let uuid = deleteBtn.getAttribute('data-uuid');
-
-    let announcementRef = firebase.database().ref('announcements/' + uuid);
-    console.log(uuid)
-
-}
-
-
-
 $(document).ready(function() {
     //Check Auth
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
-            console.log('logged in')
             let displayName = user.displayName;
             const photoURL = user.photoURL;
             const email = user.email;
@@ -263,7 +253,7 @@ $(document).ready(function() {
                     alert('You need a PDSB Account')
                     window.location.replace('/login.html')
                 }).catch((error) => {
-                    console.log(error)
+                    console.error(error)
                 })
 
             }
@@ -288,14 +278,8 @@ $(document).ready(function() {
             //List Announcements with Database Data
             for (let i = Object.keys(announcements).length - 1; i >= 0; i--) {
                 let key = Object.keys(announcements)[i];
-                console.log(i)
-                console.log(announcements[key]);
-                console.log(key)
                 showAnnouncements(announcements[key], key);
             }
-            // console.log(announcements);
-        } else {
-            console.log('No Data Available')
         }
     }).catch((error) => {
         console.error(error)
@@ -307,8 +291,10 @@ document.getElementById('logout-btn').addEventListener('click', logout);
 
 //Send Announement to Database
 $('#newAnnouncementForm').submit(function(event) {
-    console.log('Submit to Firebase')
+    // Stop the page from reloading
+    event.preventDefault();
 
+    // Get all the form values, and checkbox states
     var title = $('#titleInput').val();
 
     var message = $('#messageTextarea').val();
@@ -319,71 +305,59 @@ $('#newAnnouncementForm').submit(function(event) {
     var gr10 = $('#10Checkbox').prop('checked');
     var gr11 = $('#11Checkbox').prop('checked');
     var gr12 = $('#12Checkbox').prop('checked');
+    var allGr = $('#allGradesCheckbox').prop('checked');
 
     var male = $('#maleFormCheckbox').prop('checked');
     var female = $('#femaleFormCheckbox').prop('checked');
+    var allGe = $('#allGendersCheckbox').prop('checked');
 
     var date = $('#datepicker').val();
-    console.log(date)
 
+    // Generate a Unique ID for saving the announcement to the database
     let uuid = Date.now();
 
+    // JSON object format for the announcement
     var newAnnouncement = {
         "title": title,
         "message": message,
         "club": club,
         "date": date,
-        "grade": { "9": gr9, "10": gr10, "11": gr11, "12": gr12 },
-        "gender": { "male": male, "female": female }
+        "grade": { "9": gr9, "10": gr10, "11": gr11, "12": gr12, "all": allGr },
+        "gender": { "male": male, "female": female, "all": allGe }
     }
 
-    console.log(newAnnouncement)
-
+    // Use the UUID to generate a unique path in the database for each announcement
     var announcementsRef = firebase.database().ref('announcements/' + uuid);
     announcementsRef.set(newAnnouncement)
         .then(function() {
-            console.log('Success')
+            // After sending the announcement to firebase
+            // Display the updated announcements
             var dbRef = firebase.database().ref();
             dbRef.child('announcements').get().then((snapshot) => {
                 if (snapshot.exists()) {
-                    console.log('exists')
                     var announcements = snapshot.toJSON();
                     //List Announcements with Database Data
                     $('#upcoming').empty();
                     for (let i = Object.keys(announcements).length - 1; i >= 0; i--) {
                         let keys = Object.keys(announcements)[i];
-                        console.log(i)
-                        console.log(announcements[keys]);
-                        console.log(keys)
                         showAnnouncements(announcements[keys], keys);
                     }
-                    // console.log(announcements);
-                } else {
-                    console.log('No Data Available')
                 }
             }).catch((error) => {
                 console.error(error)
             })
         })
         .catch(function(err) {
-            console.log('Fail' + err.message)
+            console.error('Fail' + err.message)
         })
-
-    event.preventDefault();
 });
 
+// Add event listener for edit announcement buttons
+// opens edit form modal
 $('#editAnnouncement').on('show.bs.modal', function(event) {
-    // var newAnnouncement = {
-    //     "title": title,
-    //     "message": message,
-    //     "club": club,
-    //     "date": date,
-    //     "grade": { "9": gr9, "10": gr10, "11": gr11, "12": gr12 },
-    //     "gender": { "male": male, "female": female }
-    // }
-
     let button = $(event.relatedTarget);
 
+    // Get announcement data set as attributes in the button
     let title = button.data('title');
     let message = button.data('message');
     let club = button.data('club');
@@ -392,10 +366,13 @@ $('#editAnnouncement').on('show.bs.modal', function(event) {
     let gr10 = button.data('grade10');
     let gr11 = button.data('grade11');
     let gr12 = button.data('grade12');
+    let allGr = button.data('allgrade')
     let male = button.data('male');
     let female = button.data('female');
+    let allGe = button.data('allgender')
     let uuid = button.data('uuid');
 
+    // Update form with announcement data
     let modal = $(this);
     modal.find('#editTitle').val(title);
     modal.find('#editTextarea').val(message);
@@ -406,19 +383,22 @@ $('#editAnnouncement').on('show.bs.modal', function(event) {
     modal.find('#edit10Checkbox').prop('checked', gr10);
     modal.find('#edit11Checkbox').prop('checked', gr11);
     modal.find('#edit12Checkbox').prop('checked', gr12);
+    modal.find('#editAllGradeCheckbox').prop('checked', allGr);
 
-    modal.find('#editmaleFormCheckbox').prop('checked', male);
-    modal.find('#editfemaleFormCheckbox').prop('checked', female);
+    modal.find('#editMaleFormCheckbox').prop('checked', male);
+    modal.find('#editMemaleFormCheckbox').prop('checked', female);
+    modal.find('#editAllGenderCheckbox').prop('checked', allGe);
 
     modal.find('#uuid-label').val(uuid);
-    console.log(uuid);
 });
 
-//Send Edited Announement to Database
+// Send Edited Announement to Database
+// On submit listener for the announcement edit modal
 $('#editAnnouncementForm').submit(function(event) {
+    // Stop submit from reloading page
     event.preventDefault();
-    console.log('Submit Edit to Firebase')
 
+    // Retrieve values from edit form
     var title = $('#editTitle').val();
 
     var message = $('#editTextarea').val();
@@ -434,43 +414,36 @@ $('#editAnnouncementForm').submit(function(event) {
     var female = $('#editfemaleFormCheckbox').prop('checked');
 
     var date = $('#editDatePicker').val();
-    console.log(date)
 
     let uuid = $('#uuid-label').val();
-    console.log(uuid);
 
+    // Create JSON object of edited form
     var editedAnnouncement = {
         "title": title,
         "message": message,
         "club": club,
         "date": date,
-        "grade": { "9": gr9, "10": gr10, "11": gr11, "12": gr12 },
-        "gender": { "male": male, "female": female }
+        "grade": { "9": gr9, "10": gr10, "11": gr11, "12": gr12, "all": allGr },
+        "gender": { "male": male, "female": female, "all": allGe }
     }
 
-    console.log(editedAnnouncement);
-
+    // Use UUID to select the announcement in the database
     var announcementsRef = firebase.database().ref('announcements/' + uuid);
+    // Update announcement with new data
     announcementsRef.update(editedAnnouncement)
         .then(function() {
-            console.log('Successfully Edited')
+            // After updating announcement
+            // Reload announcements
             var dbRef = firebase.database().ref();
             dbRef.child('announcements').get().then((snapshot) => {
                 if (snapshot.exists()) {
-                    console.log('exists')
                     var announcements = snapshot.toJSON();
                     //List Announcements with Database Data
                     $('#upcoming').empty();
                     for (let i = Object.keys(announcements).length - 1; i >= 0; i--) {
                         let keys = Object.keys(announcements)[i];
-                        console.log(i)
-                        console.log(announcements[keys]);
-                        console.log(keys)
                         showAnnouncements(announcements[keys]);
                     }
-                    // console.log(announcements);
-                } else {
-                    console.log('No Data Available')
                 }
             }).catch((error) => {
                 console.error(error)
@@ -482,56 +455,65 @@ $('#editAnnouncementForm').submit(function(event) {
 });
 
 //Delete Announcement Function
+// On Click Event listener for delete button
 $('#upcoming').on('click', 'a.delete-btn', function() {
+    // Get UUID
+    // And use it to select the announcement in the database
     let uuid = $(this).data('uuid');
-    console.log(uuid);
     let announcementRef = firebase.database().ref('announcements/' + uuid);
-
+    
+    // Remove selected announcement
     announcementRef.remove()
         .then(function() {
-            console.log('Successfully Deleted')
+            // After removing the announcement,
+            // Fetch and update the announcements
             var dbRef = firebase.database().ref();
             dbRef.child('announcements').get().then((snapshot) => {
                 if (snapshot.exists()) {
-                    console.log('exists')
                     var announcements = snapshot.toJSON();
                     //List Announcements with Database Data
                     $('#upcoming').empty();
                     for (let i = Object.keys(announcements).length - 1; i >= 0; i--) {
                         let keys = Object.keys(announcements)[i];
-                        console.log(i)
-                        console.log(announcements[keys]);
-                        console.log(keys)
                         showAnnouncements(announcements[keys]);
                     }
-                    // console.log(announcements);
-                } else {
-                    console.log('No Data Available')
                 }
             }).catch((error) => {
                 console.error(error)
             })
         })
         .catch(function(err) {
-            console.log('Fail' + err.message)
+            console.error('Fail' + err.message)
         });
 });
 
-//Search Function
+// Search Function
+// Uses the keyup listener to check for keystrokes on the search bar
 $('#search-bar').keyup(function() {
+    // Get the value of the search
     let search = $(this).val().toUpperCase();
+    // Get the number of announcements
     let annsLen = $('#upcoming li').length;
+    let matches = 0;
 
     for (let i = 0; i < annsLen; i++) {
         let card = $('#upcoming').children('li').eq(i);
         let title = $('#upcoming').children('li').eq(i).children('div').children('div').children('div')
             .first().next().children('h4').text();
         if (title.toUpperCase().indexOf(search) != -1) {
-            console.log(title + ' matches')
             card.css('display', 'list-item');
+            matches++;
         } else {
-            console.log(title + ' dont match')
             card.css('display', 'none');
         }
+    }
+
+    // IF there are no matches
+    if (matches == 0) {   
+        // Display the no results card
+        document.getElementById('noResultsCard').style.display = 'list-item';
+    } else {
+        // ELSE keep it hidden
+        document.getElementById('noResultsCard').style.display = 'none';
     }
 });

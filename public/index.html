@@ -219,7 +219,7 @@
                            </div>
                         </li>
                         <!-- NOTIFICATION BUTTON -->
-                        <li class="nav-item dropdown notification_dropdown">
+                        <!-- <li class="nav-item dropdown notification_dropdown">
                            <a class="nav-link  ai-icon" href="javascript:void(0)" role="button" data-toggle="dropdown">
                               <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                                  <path
@@ -295,7 +295,7 @@
                               <a class="all-notification" href="javascript:void(0)">See all notifications
                               <i class="ti-arrow-right"></i></a>
                            </div>
-                        </li>
+                        </li> -->
                         <li class="nav-item dropdown header-profile">
                            <a class="nav-link" href="#" role="button" data-toggle="dropdown">
                               <img src="images/profile/pic1.jpg" width="20" alt="" id="profilePicture"/>
@@ -419,44 +419,85 @@
                                   </div>
                               </div>
                           </li> -->
-                          <!-- <li class="mx-5">
+                          <li class="mx-5" id="noResultsCard">
                            <div class="card mx-5">
                                   <h5 class="card-title text-white text-center mt-3">Sorry!</h5>
-                                  <p class="card-text">No Results Available</a>
-                              <div class="card-footer bg-transparent border-0 text-white">Last updateed 3 min ago
-                              </div>
+                                  <p class="card-text text-center">No Results Available</a>
+                                 <div class="card-footer bg-transparent border-0 text-white text-center">
+                                    <button class="btn btn-primary" onclick='clearSearch();'>Clear Search</button>
+                                 </div>
                           </div>
-                          </li> -->
+                          </li>
                      </ul>
                   </div>
-                  <div class="col-xl-3 col-md-12 d-flex justify-content-center">
+                  <div class="col-xl-3 col-md-12 d-flex">
                      <div class="position-fixed filter-column">
                         <h2 class="text-center font-weight-bold">Filter</h2>
+                        <form>
                            <ul>
                               <li>
-                                 <div class="p-3 m-2">
+                                 <div class="p-3 mx-2 mt-2">
                                     <div class="form-group">
                                        <label class="filter-label" for="filterGrade">Grade</label>
-                                       <select class="form-control default-select" name="filterGrade" id="filterGrade">
-                                          <option value="" disabled selected hidden>Select Grade</option>
-                                          <option>Grade 9</option>
-                                          <option>Grade 10</option>
-                                          <option>Grade 11</option>
-                                          <option>Grade 12</option>
-                                       </select>
+                                       <!-- <select class="form-control default-select" data-name="grade" name="filterGrade" id="filterGrade">
+                                          <option value="" hidden selected="selected">Select Grade</option>
+                                          <option value="9">Grade 9</option>
+                                          <option value="10">Grade 10</option>
+                                          <option value="11">Grade 11</option>
+                                          <option value="12">Grade 12</option>
+                                          <option value="all">All Grades</option>
+                                       </select> -->
+                                       <div class="row mb-2">
+                                          <div class="col-3 text-center mb-2">
+                                             <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" data-name="gr9Checkbox" id="filterGrade9Checkbox">
+                                                <label class="custom-control-label" for="filterGrade9Checkbox">
+                                                9</label>
+                                             </div>
+                                          </div>
+                                          <div class="col-3 text-center mb-2">
+                                             <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" data-name="gr10Checkbox" id="filterGrade10Checkbox">
+                                                <label class="custom-control-label" for="filterGrade10Checkbox">
+                                                10</label>
+                                             </div>
+                                          </div>
+                                          <div class="col-3 text-center mb-2">
+                                             <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" data-name="gr11Checkbox" id="filterGrade11Checkbox">
+                                                <label class="custom-control-label" for="filterGrade11Checkbox">
+                                                11</label>
+                                             </div>
+                                          </div>
+                                          <div class="col-3 text-center mb-2">
+                                             <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" data-name="gr12Checkbox" id="filterGrade12Checkbox">
+                                                <label class="custom-control-label" for="filterGrade12Checkbox">
+                                                12</label>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="text-center">
+                                          <div class="custom-control custom-checkbox">
+                                             <input type="checkbox" class="custom-control-input" data-name="allGradeCheckbox" id="filterAllGradeCheckbox">
+                                             <label class="custom-control-label" for="filterAllGradeCheckbox">
+                                             All</label>
+                                          </div>
+                                       </div>
                                     </div>
                                  </div>
                               </li>
                               <li>
-                                 <div class="px-3 py-1 m-2">
+                                 <div class="px-3 py-1 mx-2 mb-2">
                                     <div class="form-group">
                                        <label class="filter-label" for="filterClub">Club</label>
-                                       <select class="form-control default-select" name="filterClub" id="filterClub">
-                                          <option value="" disabled selected hidden>Select Club</option>
-                                          <option>DECA</option>
-                                          <option>HOSA</option>
-                                          <option>VEX</option>
-                                          <option>Hack Club</option>
+                                       <select class="form-control default-select" data-name="club" name="filterClub" id="filterClub">
+                                          <option value="" selected>Select Club</option>
+                                          <option value="DECA">DECA</option>
+                                          <option value="HOSA">HOSA</option>
+                                          <option value="VEX">VEX</option>
+                                          <option value="Hack Club">Hack Club</option>
+                                          <option value="All">All Clubs</option>
                                        </select>
                                     </div>
                                  </div>
@@ -468,17 +509,24 @@
                                        <div class="row">
                                           <div class="col-6 text-center">
                                              <div class="custom-control custom-checkbox mb-3">
-                                                <input type="checkbox" class="custom-control-input" id="filterMaleCheckbox">
+                                                <input type="checkbox" class="custom-control-input" data-name="maleCheckbox" id="filterMaleCheckbox">
                                                 <label class="custom-control-label" for="filterMaleCheckbox">
                                                 Male</label>
                                              </div>
                                           </div>
                                           <div class="col-6 text-center">
                                              <div class="custom-control custom-checkbox mb-3">
-                                                <input type="checkbox" class="custom-control-input" id="filterFemaleCheckbox">
+                                                <input type="checkbox" class="custom-control-input" data-name="femaleCheckbox" id="filterFemaleCheckbox">
                                                 <label class="custom-control-label" for="filterFemaleCheckbox">
                                                 Female</label>
                                              </div>
+                                          </div>
+                                       </div>
+                                       <div class="text-center">
+                                          <div class="custom-control custom-checkbox mb-3">
+                                             <input type="checkbox" class="custom-control-input" data-name="allGenderCheckbox" id="filterAllGenderCheckbox">
+                                             <label class="custom-control-label" for="filterAllGenderCheckbox">
+                                             All</label>
                                           </div>
                                        </div>
                                     </div>
@@ -488,7 +536,7 @@
                                  <div class="px-3 py-1 m-2">
                                     <div class="form-group">
                                        <label class="filter-label" for="datepicker">Date</label>
-                                       <input name="datepicker" id="filterDate" class="custom-input datepicker-default form-control picker__input" placeholder="Add Date" id="datepicker" readonly="" aria-haspopup="true" aria-expanded="false" aria-readonly="false" aria-owns="datepicker_root">
+                                       <input name="datepicker" id="filterDate" data-name="date" class="custom-input datepicker-default form-control picker__input" placeholder="Add Date" id="datepicker" readonly="" aria-haspopup="true" aria-expanded="false" aria-readonly="false" aria-owns="datepicker_root">
                                        <div class="picker" id="datepicker_root" aria-hidden="true">
                                           <div class="picker__holder" tabindex="-1">
                                              <div class="picker__frame">
@@ -711,11 +759,12 @@
                                  </div>
                               </li>
                               <li>
-                                 <div class="px-3 py-1 m-4 text-center">
-                                    <button class="btn btn-secondary reset-btn">Reset</button>
+                                 <div class="px-3 py-1 mx-4 my-1 text-center">
+                                    <button class="btn btn-secondary reset-btn" id="resetFilterBtn" type="button">Reset</button>
                                  </div>
                               </li>
                            </ul>
+                        </form>
                      </div>
                   </div>
                </div>
