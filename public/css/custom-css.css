@@ -1,8 +1,8 @@
-.header-right .header-profile > a.nav-link .header-info {
+.header-right .header-profile>a.nav-link .header-info {
     text-align: right;
 }
 
-div.form-group > input.custom-input {
+div.form-group>input.custom-input {
     background: #2F363E !important;
     border-color: #2F363E !important;
 }
@@ -69,3 +69,22 @@ label.filter-label {
     margin: 30px 20px 15px;
 }
 
+/* Set a rounded scrollbar with at transparent background that changes color on hover */
+html::-webkit-scrollbar {
+    width: 20px;
+}
+
+html::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+    background-color: #a8bbbf;
+}

@@ -131,11 +131,9 @@ $(document).ready(function() {
             }
             
             // Display some profile data of the user on the page
-            
-
             nameElement.innerHTML = displayName;
             imgSrc.src = photoURL;
-
+            
             // Hide the no results card
             document.getElementById('noResultsCard').style.display = 'none';
         } else {
